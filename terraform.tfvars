@@ -13,3 +13,10 @@ private_subnets    = ["10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24"]
 #####
 
 security_group_name = "smart_home_security_group"
+
+#####
+### DynamoDB 
+#####
+
+hash_key      = "id"
+hash_key_type = "N"
