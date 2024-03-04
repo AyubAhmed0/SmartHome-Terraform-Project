@@ -27,16 +27,56 @@ module "security" {
 ### DynamoDB
 #####
 
-locals {
-  table_names = ["Lighting", "Heating"]
-}
 module "dynamodb_tables" {
   source = "./modules/dynamodb"
 
-  count         = length(local.table_names)
-  table_name    = local.table_names[count.index]
+  count         = length(var.table_names)
+  table_name    = var.table_names[count.index]
   hash_key      = var.hash_key
   hash_key_type = var.hash_key_type
 }
 
+#####
+### Servers
+#####
+
+module "heating_service" {
+  source                 = "./modules/server"
+  ami                    = var.ami
+  subnet_id              = module.networking.public_subnets[0]
+  vpc_security_group_ids = [module.security.security_group_id]
+  instance_type          = var.instance_type
+  is_public              = true
+  instance_name          = "heating_service"
+}
+
+module "light_service" {
+  source                 = "./modules/server"
+  ami                    = var.ami
+  subnet_id              = module.networking.public_subnets[1]
+  vpc_security_group_ids = [module.security.security_group_id]
+  instance_type          = var.instance_type
+  is_public              = true
+  instance_name          = "light_service"
+}
+
+module "status_service" {
+  source                 = "./modules/server"
+  ami                    = var.ami
+  subnet_id              = module.networking.public_subnets[2]
+  vpc_security_group_ids = [module.security.security_group_id]
+  instance_type          = var.instance_type
+  is_public              = true
+  instance_name          = "status_service"
+}
+
+module "auth_service" {
+  source                 = "./modules/server"
+  ami                    = var.ami
+  subnet_id              = module.networking.private_subnets[2]
+  vpc_security_group_ids = [module.security.security_group_id]
+  instance_type          = var.instance_type
+  is_public              = false
+  instance_name          = "auth_service"
+}
 
