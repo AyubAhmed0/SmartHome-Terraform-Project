@@ -22,3 +22,11 @@ variable "availability_zones" {
 variable "private_subnets" {
   type = list(string)
 }
+
+#####
+### Security
+#####
+
+variable "security_group_name" {
+  type = string
+}

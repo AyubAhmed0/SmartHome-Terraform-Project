@@ -11,3 +11,14 @@ module "networking" {
   public_subnets     = var.public_subnets
   private_subnets    = var.private_subnets
 }
+
+#####
+### Security 
+#####
+
+module "security" {
+  source = "./modules/security"
+
+  vpc_id              = module.networking.vpc_id
+  security_group_name = var.security_group_name
+}
