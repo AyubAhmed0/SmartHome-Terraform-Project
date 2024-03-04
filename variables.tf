@@ -44,3 +44,19 @@ variable "hash_key_type" {
   description = "The data type of the hash key"
   type        = string
 }
+
+variable "table_names" {
+  type = list(string)
+}
+
+#####
+### Servers
+#####
+
+variable "ami" {
+  type = string
+}
+
+variable "instance_type" {
+  type = string
+}

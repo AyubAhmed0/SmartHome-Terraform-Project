@@ -18,5 +18,13 @@ security_group_name = "smart_home_security_group"
 ### DynamoDB 
 #####
 
+table_names   = ["Lighting", "Heating"]
 hash_key      = "id"
 hash_key_type = "N"
+
+#####
+### Servers
+#####
+
+ami           = "ami-0505148b3591e4c07"
+instance_type = "t2.micro"
