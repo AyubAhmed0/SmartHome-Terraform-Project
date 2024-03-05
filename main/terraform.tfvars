@@ -30,3 +30,13 @@ ami             = "ami-0505148b3591e4c07"
 auth_public_ami = "ami-073d73e68d5aea8d8"
 instance_type   = "t2.micro"
 key_name        = "smart-home-key"
+
+#####
+### Load Balancer
+#####
+
+load_balancer_name        = "smart-home-lb"
+load_balancer_type        = "application"
+listener_port             = 80
+listener_protocol         = "HTTP"
+listener_rule_action_type = "forward"
