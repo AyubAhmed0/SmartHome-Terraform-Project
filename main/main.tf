@@ -95,4 +95,24 @@ module "auth_service" {
   instance_name          = "auth_service"
 }
 
+#####
+### Load Balancer
+#####
 
+module "smart_home_load_balancer" {
+  source = "./modules/loadbalancer"
+
+  load_balancer_name          = var.load_balancer_name
+  load_balancer_type          = var.load_balancer_type
+  listener_port               = var.listener_port
+  listener_protocol           = var.listener_protocol
+  listener_rule_action_type   = var.listener_rule_action_type
+  public_subnets              = module.networking.public_subnets
+  private_subnets             = module.networking.private_subnets
+  security_groups             = [module.security.security_group_id]
+  vpc_id                      = module.networking.vpc_id
+  heating_service_instance_id = module.heating_service.instance_id
+  light_service_instance_id   = module.light_service.instance_id
+  status_service_instance_id  = module.status_service.instance_id
+  auth_service_instance_id    = module.auth_service.instance_id
+}

@@ -68,3 +68,26 @@ variable "instance_type" {
 variable "key_name" {
   type = string
 }
+
+#####
+### Load Balancer
+#####
+variable "load_balancer_name" {
+  type = string
+}
+
+variable "load_balancer_type" {
+  type = string
+}
+
+variable "listener_port" {
+  type = number
+}
+
+variable "listener_protocol" {
+  type = string
+}
+
+variable "listener_rule_action_type" {
+  type = string
+}
