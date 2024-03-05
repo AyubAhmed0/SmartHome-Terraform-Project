@@ -28,3 +28,4 @@ hash_key_type = "N"
 
 ami           = "ami-0505148b3591e4c07"
 instance_type = "t2.micro"
+key_name      = "smart-home-key"

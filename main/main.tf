@@ -46,6 +46,7 @@ module "heating_service" {
   subnet_id              = module.networking.public_subnets[0]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
+  key_name               = var.key_name
   is_public              = true
   instance_name          = "heating_service"
 }
@@ -56,6 +57,7 @@ module "light_service" {
   subnet_id              = module.networking.public_subnets[1]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
+  key_name               = var.key_name
   is_public              = true
   instance_name          = "light_service"
 }
@@ -66,6 +68,7 @@ module "status_service" {
   subnet_id              = module.networking.public_subnets[2]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
+  key_name               = var.key_name
   is_public              = true
   instance_name          = "status_service"
 }
@@ -76,6 +79,7 @@ module "auth_service" {
   subnet_id              = module.networking.private_subnets[2]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
+  key_name               = var.key_name
   is_public              = false
   instance_name          = "auth_service"
 }
