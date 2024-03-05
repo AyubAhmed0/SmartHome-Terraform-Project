@@ -26,6 +26,7 @@ hash_key_type = "N"
 ### Servers
 #####
 
-ami           = "ami-0505148b3591e4c07"
-instance_type = "t2.micro"
-key_name      = "smart-home-key"
+ami             = "ami-0505148b3591e4c07"
+auth_public_ami = "ami-073d73e68d5aea8d8"
+instance_type   = "t2.micro"
+key_name        = "smart-home-key"

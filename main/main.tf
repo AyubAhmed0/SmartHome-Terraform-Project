@@ -73,9 +73,20 @@ module "status_service" {
   instance_name          = "status_service"
 }
 
-module "auth_service" {
+module "auth_service_public" {
   source                 = "./modules/server"
   ami                    = var.ami
+  subnet_id              = module.networking.public_subnets[2]
+  vpc_security_group_ids = [module.security.security_group_id]
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  is_public              = true
+  instance_name          = "auth_service_public_setup"
+}
+
+module "auth_service" {
+  source                 = "./modules/server"
+  ami                    = var.auth_public_ami
   subnet_id              = module.networking.private_subnets[2]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
@@ -83,4 +94,5 @@ module "auth_service" {
   is_public              = false
   instance_name          = "auth_service"
 }
+
 

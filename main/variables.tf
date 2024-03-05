@@ -57,6 +57,10 @@ variable "ami" {
   type = string
 }
 
+variable "auth_public_ami" {
+  type = string
+}
+
 variable "instance_type" {
   type = string
 }
