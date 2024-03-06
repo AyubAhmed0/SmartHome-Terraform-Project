@@ -91,3 +91,39 @@ variable "listener_protocol" {
 variable "listener_rule_action_type" {
   type = string
 }
+
+#####
+### Launch Template
+#####
+
+variable "heating_lt_ami" {
+  type = string
+}
+
+variable "light_lt_ami" {
+  type = string
+}
+
+variable "status_lt_ami" {
+  type = string
+}
+
+variable "auth_lt_ami" {
+  type = string
+}
+
+#####
+### Auto Scaling
+#####
+
+variable "min_size" {
+  type = number
+}
+
+variable "desired_capacity" {
+  type = number
+}
+
+variable "max_size" {
+  type = number
+}

@@ -27,7 +27,7 @@ hash_key_type = "N"
 #####
 
 ami             = "ami-0505148b3591e4c07"
-auth_public_ami = "ami-073d73e68d5aea8d8"
+auth_public_ami = "ami-06010b504f5d7eae6"
 instance_type   = "t2.micro"
 key_name        = "smart-home-key"
 
@@ -40,3 +40,21 @@ load_balancer_type        = "application"
 listener_port             = 80
 listener_protocol         = "HTTP"
 listener_rule_action_type = "forward"
+
+#####
+### Launch Template
+#####
+
+heating_lt_ami = "ami-0446dcb1b143502fa"
+light_lt_ami   = "ami-0a5d4e17081422de3"
+status_lt_ami  = "ami-0de7871263485e01d"
+auth_lt_ami    = "ami-0cc0fc940d4e47690"
+
+#####
+### Auto Scaling
+#####
+
+min_size         = 1
+desired_capacity = 2
+max_size         = 3
+

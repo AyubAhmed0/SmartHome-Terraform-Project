@@ -116,3 +116,39 @@ module "smart_home_load_balancer" {
   status_service_instance_id  = module.status_service.instance_id
   auth_service_instance_id    = module.auth_service.instance_id
 }
+
+#####
+### Launch Template
+#####
+module "smart_home_service_launch_templates" {
+  source = "./modules/launch-template"
+
+  heating_lt_ami  = var.heating_lt_ami
+  light_lt_ami    = var.light_lt_ami
+  status_lt_ami   = var.status_lt_ami
+  auth_lt_ami     = var.auth_lt_ami
+  instance_type   = var.instance_type
+  key_name        = var.key_name
+  security_groups = [module.security.security_group_id]
+}
+
+#####
+### Auto Scaling
+#####
+module "autoscaling" {
+  source = "./modules/autoscaling"
+
+  min_size         = var.min_size
+  max_size         = var.max_size
+  desired_capacity = var.desired_capacity
+  heating_lt_id    = module.smart_home_service_launch_templates.heating_service_id
+  light_lt_id      = module.smart_home_service_launch_templates.light_service_id
+  status_lt_id     = module.smart_home_service_launch_templates.status_service_id
+  auth_lt_id       = module.smart_home_service_launch_templates.auth_service_id
+  public_subnets   = module.networking.public_subnets
+  private_subnets  = module.networking.private_subnets
+  heating_tg_arn   = module.smart_home_load_balancer.heating_service_arn
+  light_tg_arn     = module.smart_home_load_balancer.light_service_arn
+  status_tg_arn    = module.smart_home_load_balancer.status_service_arn
+  auth_tg_arn      = module.smart_home_load_balancer.auth_service_arn
+}
