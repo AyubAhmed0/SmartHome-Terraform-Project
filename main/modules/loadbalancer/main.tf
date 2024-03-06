@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "heating_service" {
 
   health_check {
     enabled  = true
-    path     = "/health"
+    path     = "/api/heating/health"
     protocol = "HTTP"
   }
 }
