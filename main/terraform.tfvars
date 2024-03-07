@@ -21,15 +21,18 @@ security_group_name = "smart_home_security_group"
 table_names   = ["Lighting", "Heating"]
 hash_key      = "id"
 hash_key_type = "N"
+auth_hash_key = "username"
+auth_hash_key_type = "S"
+auth_table_name = "Auth"
 
 #####
 ### Servers
 #####
 
-ami             = "ami-0505148b3591e4c07"
-auth_public_ami = "ami-06010b504f5d7eae6"
-instance_type   = "t2.micro"
-key_name        = "smart-home-key"
+ami = "ami-0505148b3591e4c07"
+# auth_public_ami = "ami-06010b504f5d7eae6"
+instance_type = "t2.micro"
+key_name      = "smart-home-key"
 
 #####
 ### Load Balancer
@@ -45,10 +48,10 @@ listener_rule_action_type = "forward"
 ### Launch Template
 #####
 
-heating_lt_ami = "ami-0446dcb1b143502fa"
-light_lt_ami   = "ami-0a5d4e17081422de3"
-status_lt_ami  = "ami-0de7871263485e01d"
-auth_lt_ami    = "ami-0cc0fc940d4e47690"
+heating_ami = "ami-0446dcb1b143502fa"
+light_ami   = "ami-0a5d4e17081422de3"
+status_ami  = "ami-0de7871263485e01d"
+auth_ami    = "ami-0cc0fc940d4e47690"
 
 #####
 ### Auto Scaling

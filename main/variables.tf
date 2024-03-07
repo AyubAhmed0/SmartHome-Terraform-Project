@@ -49,6 +49,18 @@ variable "table_names" {
   type = list(string)
 }
 
+variable "auth_hash_key" {
+  type        = string
+}
+
+variable "auth_hash_key_type" {
+  type        = string
+}
+
+variable "auth_table_name" {
+  type = string
+}
+
 #####
 ### Servers
 #####
@@ -57,9 +69,9 @@ variable "ami" {
   type = string
 }
 
-variable "auth_public_ami" {
-  type = string
-}
+# variable "auth_public_ami" {
+#   type = string
+# }
 
 variable "instance_type" {
   type = string
@@ -93,22 +105,22 @@ variable "listener_rule_action_type" {
 }
 
 #####
-### Launch Template
+### AMIs
 #####
 
-variable "heating_lt_ami" {
+variable "heating_ami" {
   type = string
 }
 
-variable "light_lt_ami" {
+variable "light_ami" {
   type = string
 }
 
-variable "status_lt_ami" {
+variable "status_ami" {
   type = string
 }
 
-variable "auth_lt_ami" {
+variable "auth_ami" {
   type = string
 }
 

@@ -35,6 +35,14 @@ module "dynamodb_tables" {
   hash_key      = var.hash_key
   hash_key_type = var.hash_key_type
 }
+# Auth table
+module "dynamodb_auth_table" {
+  source = "./modules/dynamodb"
+
+  table_name    = var.auth_table_name
+  hash_key      = var.auth_hash_key
+  hash_key_type = var.auth_hash_key_type
+}
 
 #####
 ### Servers
@@ -42,7 +50,7 @@ module "dynamodb_tables" {
 
 module "heating_service" {
   source                 = "./modules/server"
-  ami                    = var.ami
+  ami                    = var.heating_ami
   subnet_id              = module.networking.public_subnets[0]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
@@ -53,7 +61,7 @@ module "heating_service" {
 
 module "light_service" {
   source                 = "./modules/server"
-  ami                    = var.ami
+  ami                    = var.light_ami
   subnet_id              = module.networking.public_subnets[1]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
@@ -64,7 +72,7 @@ module "light_service" {
 
 module "status_service" {
   source                 = "./modules/server"
-  ami                    = var.ami
+  ami                    = var.status_ami
   subnet_id              = module.networking.public_subnets[2]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
@@ -73,20 +81,9 @@ module "status_service" {
   instance_name          = "status_service"
 }
 
-module "auth_service_public" {
-  source                 = "./modules/server"
-  ami                    = var.ami
-  subnet_id              = module.networking.public_subnets[2]
-  vpc_security_group_ids = [module.security.security_group_id]
-  instance_type          = var.instance_type
-  key_name               = var.key_name
-  is_public              = true
-  instance_name          = "auth_service_public_setup"
-}
-
 module "auth_service" {
   source                 = "./modules/server"
-  ami                    = var.auth_public_ami
+  ami                    = var.auth_ami
   subnet_id              = module.networking.private_subnets[2]
   vpc_security_group_ids = [module.security.security_group_id]
   instance_type          = var.instance_type
@@ -94,6 +91,18 @@ module "auth_service" {
   is_public              = false
   instance_name          = "auth_service"
 }
+
+# module "auth_service_public" {
+#   source                 = "./modules/server"
+#   ami                    = var.ami
+#   subnet_id              = module.networking.public_subnets[2]
+#   vpc_security_group_ids = [module.security.security_group_id]
+#   instance_type          = var.instance_type
+#   key_name               = var.key_name
+#   is_public              = true
+#   instance_name          = "auth_service_public_setup"
+# }
+
 
 #####
 ### Load Balancer
@@ -120,13 +129,14 @@ module "smart_home_load_balancer" {
 #####
 ### Launch Template
 #####
+
 module "smart_home_service_launch_templates" {
   source = "./modules/launch-template"
 
-  heating_lt_ami  = var.heating_lt_ami
-  light_lt_ami    = var.light_lt_ami
-  status_lt_ami   = var.status_lt_ami
-  auth_lt_ami     = var.auth_lt_ami
+  heating_lt_ami  = var.heating_ami
+  light_lt_ami    = var.light_ami
+  status_lt_ami   = var.status_ami
+  auth_lt_ami     = var.auth_ami
   instance_type   = var.instance_type
   key_name        = var.key_name
   security_groups = [module.security.security_group_id]
@@ -134,7 +144,8 @@ module "smart_home_service_launch_templates" {
 
 #####
 ### Auto Scaling
-#####
+# #####
+
 module "autoscaling" {
   source = "./modules/autoscaling"
 

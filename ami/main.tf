@@ -1,11 +1,12 @@
-resource "aws_ami_from_instance" "auth_public_ami" {
-  name               = "AuthPublicAMI"
-  source_instance_id = "i-0820a1279f3428fa0"
+# # auth_public_ami is to set up the the private auth services.  
+# resource "aws_ami_from_instance" "auth_public_ami" {
+#   name               = "AuthPublicAMI"
+#   source_instance_id = "i-0820a1279f3428fa0"
 
-  tags = {
-    Name = "auth_public_ami"
-  }
-}
+#   tags = {
+#     Name = "auth_public_ami"
+#   }
+# }
 
 # Heating service
 resource "aws_ami_from_instance" "heating_service_ami" {
