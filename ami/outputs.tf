@@ -1,6 +1,6 @@
-output "auth_public_ami" {
-  value = aws_ami_from_instance.auth_public_ami.id
-}
+# output "auth_public_ami" {
+#   value = aws_ami_from_instance.auth_public_ami.id
+# }
 output "heating_service_ami" {
   value = aws_ami_from_instance.heating_service_ami.id
 }
