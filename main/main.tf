@@ -142,9 +142,9 @@ module "smart_home_service_launch_templates" {
   security_groups = [module.security.security_group_id]
 }
 
+####
+## Auto Scaling
 #####
-### Auto Scaling
-# #####
 
 module "autoscaling" {
   source = "./modules/autoscaling"
